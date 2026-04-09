@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Miles Ezeilo | Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=IBM+Plex+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink: #0d0d0d;
+    --paper: #f5f0e8;
+    --amber: #c8832a;
+    --amber-light: #e8a84a;
+    --green: #2a4a2e;
+    --green-light: #4a7a52;
+    --muted: #8a8278;
+    --border: rgba(13,13,13,0.12);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.4rem 3rem;
+    background: rgba(245,240,232,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.78rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--amber);
+  }
+  .nav-links { display: flex; gap: 2.4rem; list-style: none; }
+  .nav-links a {
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--ink);
+    opacity: 0.6;
+    transition: opacity 0.2s;
+  }
+  .nav-links a:hover { opacity: 1; }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding-top: 80px;
+    overflow: hidden;
+  }
+  .hero-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 6rem 4rem 6rem 6rem;
+    animation: fadeUp 1s ease both;
+  }
+  .hero-tag {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--amber);
+    margin-bottom: 1.6rem;
+    display: flex; align-items: center; gap: 0.8rem;
+  }
+  .hero-tag::before { content: ''; display: block; width: 2rem; height: 1px; background: var(--amber); }
+  h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3.6rem, 6vw, 6rem);
+    font-weight: 300;
+    line-height: 1.04;
+    letter-spacing: -0.02em;
+    margin-bottom: 1.8rem;
+  }
+  h1 em { font-style: italic; color: var(--amber); }
+  .hero-desc {
+    font-size: 1rem;
+    line-height: 1.72;
+    color: var(--muted);
+    max-width: 44ch;
+    margin-bottom: 2.8rem;
+  }
+  .hero-cta {
+    display: flex; gap: 1rem; flex-wrap: wrap;
+  }
+  .btn {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    padding: 0.88rem 1.8rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.74rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: 1px solid var(--ink);
+    color: var(--ink);
+    transition: all 0.25s;
+    cursor: pointer;
+  }
+  .btn-filled { background: var(--ink); color: var(--paper); }
+  .btn:hover { background: var(--ink); color: var(--paper); }
+  .btn-filled:hover { background: var(--amber); border-color: var(--amber); }
+
+  .hero-right {
+    position: relative;
+    overflow: hidden;
+    animation: fadeIn 1.2s ease 0.3s both;
+  }
+  .hero-img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    filter: grayscale(20%) contrast(1.05);
+  }
+  .hero-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, rgba(200,131,42,0.15) 0%, rgba(42,74,46,0.2) 100%);
+  }
+  .hero-stat-bar {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    display: flex;
+    background: rgba(13,13,13,0.85);
+    backdrop-filter: blur(8px);
+    padding: 1.4rem 2rem;
+    gap: 0;
+  }
+  .stat {
+    flex: 1;
+    text-align: center;
+    border-right: 1px solid rgba(255,255,255,0.12);
+    padding: 0.4rem 1rem;
+  }
+  .stat:last-child { border-right: none; }
+  .stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem;
+    font-weight: 300;
+    color: var(--amber-light);
+    line-height: 1;
+    display: block;
+  }
+  .stat-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+    margin-top: 0.3rem;
+    display: block;
+  }
+
+  /* ── SECTION SHARED ── */
+  section { padding: 7rem 6rem; }
+  .section-tag {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--amber);
+    margin-bottom: 1rem;
+    display: flex; align-items: center; gap: 0.8rem;
+  }
+  .section-tag::before { content: ''; display: block; width: 1.6rem; height: 1px; background: var(--amber); }
+  h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.4rem, 4vw, 3.6rem);
+    font-weight: 300;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.6rem;
+  }
+  h2 em { font-style: italic; color: var(--amber); }
+
+  /* ── ABOUT ── */
+  .about { background: var(--ink); color: var(--paper); }
+  .about .section-tag { color: var(--amber-light); }
+  .about .section-tag::before { background: var(--amber-light); }
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    margin-top: 3.5rem;
+    align-items: start;
+  }
+  .about-body {
+    font-size: 1.05rem;
+    line-height: 1.78;
+    color: rgba(245,240,232,0.75);
+  }
+  .about-body p + p { margin-top: 1.2rem; }
+  .about-body strong { color: var(--amber-light); font-weight: 400; }
+  .about-right { display: flex; flex-direction: column; gap: 1.6rem; }
+  .about-img {
+    width: 100%; aspect-ratio: 4/3;
+    object-fit: cover;
+    filter: grayscale(30%);
+  }
+  .about-quote {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    font-style: italic;
+    font-weight: 300;
+    line-height: 1.5;
+    color: var(--amber-light);
+    border-left: 2px solid var(--amber);
+    padding-left: 1.4rem;
+  }
+
+  /* ── WORK / PROJECTS ── */
+  .work { background: var(--paper); }
+  .work-intro {
+    font-size: 1rem;
+    color: var(--muted);
+    max-width: 56ch;
+    line-height: 1.7;
+    margin-top: 0.8rem;
+    margin-bottom: 4rem;
+  }
+  .projects { display: flex; flex-direction: column; gap: 0; }
+  .project {
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    border-top: 1px solid var(--border);
+    min-height: 340px;
+    overflow: hidden;
+    transition: background 0.3s;
+  }
+  .project:hover { background: rgba(200,131,42,0.04); }
+  .project:last-child { border-bottom: 1px solid var(--border); }
+  .project-img-wrap {
+    overflow: hidden;
+    position: relative;
+  }
+  .project-img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+    filter: grayscale(20%);
+  }
+  .project:hover .project-img { transform: scale(1.04); }
+  .project-img-label {
+    position: absolute; top: 1.2rem; left: 1.2rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    padding: 0.3rem 0.7rem;
+    background: var(--amber);
+    color: white;
+  }
+  .project-content {
+    padding: 3rem 3.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1.2rem;
+  }
+  .project-org {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--amber);
+  }
+  .project h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.9rem;
+    font-weight: 400;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+  }
+  .project-desc {
+    font-size: 0.92rem;
+    line-height: 1.72;
+    color: var(--muted);
+  }
+  .project-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.4rem; }
+  .tag {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.28rem 0.7rem;
+    border: 1px solid var(--border);
+    color: var(--muted);
+  }
+  .project:nth-child(even) { grid-template-columns: 1.4fr 1fr; }
+  .project:nth-child(even) .project-img-wrap { order: 2; }
+  .project:nth-child(even) .project-content { order: 1; }
+
+  /* ── SKILLS ── */
+  .skills { background: var(--green); color: var(--paper); }
+  .skills .section-tag { color: rgba(245,240,232,0.6); }
+  .skills .section-tag::before { background: rgba(245,240,232,0.4); }
+  .skills h2 { color: var(--paper); }
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    margin-top: 4rem;
+    border: 1px solid rgba(255,255,255,0.12);
+  }
+  .skill-block {
+    padding: 2.4rem 2rem;
+    border-right: 1px solid rgba(255,255,255,0.12);
+    border-bottom: 1px solid rgba(255,255,255,0.12);
+  }
+  .skill-block:nth-child(3n) { border-right: none; }
+  .skill-block:nth-last-child(-n+3) { border-bottom: none; }
+  .skill-icon {
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+  }
+  .skill-block h4 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.24rem;
+    font-weight: 400;
+    color: var(--amber-light);
+    margin-bottom: 0.8rem;
+  }
+  .skill-block p {
+    font-size: 0.84rem;
+    line-height: 1.66;
+    color: rgba(245,240,232,0.55);
+  }
+
+  /* ── CREDENTIALS ── */
+  .creds { background: var(--paper); }
+  .creds-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    border: 1px solid var(--border);
+    margin-top: 3.5rem;
+  }
+  .cred {
+    padding: 2rem 1.6rem;
+    border-right: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+  .cred:last-child { border-right: none; }
+  .cred-year {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.62rem;
+    color: var(--amber);
+    letter-spacing: 0.12em;
+  }
+  .cred h4 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    font-weight: 400;
+    line-height: 1.3;
+  }
+  .cred p {
+    font-size: 0.78rem;
+    color: var(--muted);
+  }
+
+  /* ── CONTACT ── */
+  .contact {
+    background: var(--ink);
+    color: var(--paper);
+    text-align: center;
+    padding: 8rem 6rem;
+  }
+  .contact .section-tag { justify-content: center; color: var(--amber-light); }
+  .contact .section-tag::before { background: var(--amber-light); }
+  .contact h2 { margin-bottom: 1.2rem; color: var(--paper); }
+  .contact-sub {
+    font-size: 1rem;
+    color: rgba(245,240,232,0.5);
+    margin-bottom: 3rem;
+  }
+  .contact-links {
+    display: flex;
+    justify-content: center;
+    gap: 1.2rem;
+    flex-wrap: wrap;
+  }
+  .contact-links .btn {
+    border-color: rgba(245,240,232,0.3);
+    color: var(--paper);
+  }
+  .contact-links .btn:hover {
+    background: var(--amber);
+    border-color: var(--amber);
+    color: var(--paper);
+  }
+  .contact-links .btn-filled {
+    background: var(--amber);
+    border-color: var(--amber);
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--ink);
+    border-top: 1px solid rgba(255,255,255,0.08);
+    padding: 1.6rem 6rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  footer p {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.64rem;
+    letter-spacing: 0.1em;
+    color: rgba(245,240,232,0.3);
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    nav { padding: 1.2rem 1.6rem; }
+    .nav-links { display: none; }
+    .hero { grid-template-columns: 1fr; }
+    .hero-right { height: 50vw; }
+    .hero-left { padding: 4rem 2rem; }
+    section { padding: 5rem 2rem; }
+    .about-grid, .project, .project:nth-child(even) { grid-template-columns: 1fr; }
+    .project-img-wrap { height: 240px; }
+    .project:nth-child(even) .project-img-wrap { order: 1; }
+    .project:nth-child(even) .project-content { order: 2; }
+    .skills-grid, .creds-grid { grid-template-columns: 1fr 1fr; }
+    .cred { border-bottom: 1px solid var(--border); }
+    footer { flex-direction: column; gap: 0.6rem; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="nav-logo">Miles Ezeilo</span>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#work">Work</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <span class="hero-tag">ESG · AI · Strategy</span>
+    <h1>Miles<br><em>Ezeilo</em></h1>
+    <p class="hero-desc">ESG data analyst, AI platform strategist, and sustainability consultant. From Deloitte boardrooms to edge computing pipelines, I translate complexity into decisions that move.</p>
+    <div class="hero-cta">
+      <a href="#work" class="btn btn-filled">View Work</a>
+      <a href="#contact" class="btn">Get in Touch</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <img class="hero-img" src="https://images.unsplash.com/photo-1509391366360-2e959784a276?w=900&q=80" alt="Solar panel array">
+    <div class="hero-overlay"></div>
+    <div class="hero-stat-bar">
+      <div class="stat">
+        <span class="stat-num">6+</span>
+        <span class="stat-label">Years Across Sectors</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">4</span>
+        <span class="stat-label">ESG Frameworks</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">3</span>
+        <span class="stat-label">Continents</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">40%</span>
+        <span class="stat-label">Avg. Engagement Lift</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <span class="section-tag">About</span>
+  <h2>Built at the edge of<br><em>data and action</em></h2>
+  <div class="about-grid">
+    <div class="about-body">
+      <p>I'm a multidisciplinary professional whose work lives at the junction of <strong>ESG data governance</strong>, <strong>AI system design</strong>, and <strong>commercial strategy</strong>. My career spans Deloitte Lagos, The Climate Subak in London, and a current AI/IoT platform management role, giving me a rare mix of analytical rigour and operational delivery.</p>
+      <p>At Deloitte, I designed ESG data governance frameworks for energy clients and supported the delivery of agentic AI solutions for international banking institutions. Simultaneously, I have been leading end-to-end architecture planning for a closed-loop solar AI platform spanning edge computing via ESP32, cloud backend systems, and a five-tier AI autonomy framework.</p>
+      <p>I hold a <strong>BA from Howard University</strong> (Magna Cum Laude) and am completing my <strong>MBA in Marketing Management</strong> at Greenwich Business School. My toolkit includes Power BI, SQL, Tableau, GRI, SASB, TCFD, and ISSB frameworks.</p>
+    </div>
+    <div class="about-right">
+      <img class="about-img" src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80" alt="Analytics and data dashboard">
+      <blockquote class="about-quote">"I translate complexity into decisions that move organisations forward."</blockquote>
+    </div>
+  </div>
+</section>
+
+<!-- WORK -->
+<section class="work" id="work">
+  <span class="section-tag">Selected Work</span>
+  <h2>Projects that <em>prove</em> the point</h2>
+  <p class="work-intro">A cross-section of high-impact work spanning AI platform architecture, ESG data systems, and strategic consultancy across three continents.</p>
+
+  <div class="projects">
+
+    <!-- Project 1 -->
+    <div class="project reveal">
+      <div class="project-img-wrap">
+        <img class="project-img" src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&q=80" alt="IoT hardware circuit board">
+        <span class="project-img-label">Current Role</span>
+      </div>
+      <div class="project-content">
+        <span class="project-org">OHM Power Solutions</span>
+        <h3>Closed-Loop AI/IoT Solar Energy Platform</h3>
+        <p class="project-desc">Leading end-to-end architecture and delivery planning for a real-time solar management platform integrating edge computing (ESP32), cloud backend infrastructure, and hardware control via Modbus/RS485. Defined a multi-phase AI/ML roadmap covering autonomous agent design, grid-down detection, and a five-tier AI autonomy framework spanning advisory to full autonomous control. Managed cross-functional technical recruitment with structured interview frameworks and NDA-gated onboarding for AI/ML candidates.</p>
+        <div class="project-tags">
+          <span class="tag">AI/ML Architecture</span>
+          <span class="tag">Edge Computing</span>
+          <span class="tag">Modbus/RS485</span>
+          <span class="tag">Project Delivery</span>
+          <span class="tag">Technical Recruitment</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Project 2 -->
+    <div class="project reveal">
+      <div class="project-img-wrap">
+        <img class="project-img" src="https://images.unsplash.com/photo-1497435334941-8c899ee9e8e9?w=800&q=80" alt="Industrial energy ESG">
+        <span class="project-img-label">Deloitte</span>
+      </div>
+      <div class="project-content">
+        <span class="project-org">Deloitte · Lagos, Nigeria</span>
+        <h3>ESG Data Governance & AI Delivery</h3>
+        <p class="project-desc">Designed and implemented ESG data governance frameworks for a natural gas client, enabling KPI tracking and sustainability metrics across operational and reporting systems. Supported delivery of Agentic AI solutions for an international bank, translating stakeholder requirements into data-driven workflows. Co-created an ESG learning program covering GRI, SASB, TCFD, and ISSB frameworks alongside climate risk, carbon accounting, and Scope 1/2/3 emissions fundamentals.</p>
+        <div class="project-tags">
+          <span class="tag">GRI · SASB · TCFD · ISSB</span>
+          <span class="tag">Data Governance</span>
+          <span class="tag">Agentic AI</span>
+          <span class="tag">Carbon Accounting</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Project 3 -->
+    <div class="project reveal">
+      <div class="project-img-wrap">
+        <img class="project-img" src="https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?w=800&q=80" alt="African landscape sustainability">
+        <span class="project-img-label">ESGiAA</span>
+      </div>
+      <div class="project-content">
+        <span class="project-org">ESG in Action Africa</span>
+        <h3>Africa ESG Research & Sustainability Analytics</h3>
+        <p class="project-desc">Developed Africa-focused ESG case studies using sustainability data and metrics to highlight climate risk, environmental impact, and social impact across multiple industries. Conducted a full content and data audit to map sustainability themes and geographic trends, identifying opportunities for ESG data storytelling. Designed service offerings aligned with sustainable finance, stakeholder engagement, and ESG reporting requirements.</p>
+        <div class="project-tags">
+          <span class="tag">ESG Research</span>
+          <span class="tag">Impact Analytics</span>
+          <span class="tag">Sustainable Finance</span>
+          <span class="tag">Climate Risk</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Project 4 -->
+    <div class="project reveal">
+      <div class="project-img-wrap">
+        <img class="project-img" src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80" alt="Marketing performance analytics">
+        <span class="project-img-label">World Heritage USA</span>
+      </div>
+      <div class="project-content">
+        <span class="project-org">World Heritage USA · Remote</span>
+        <h3>Data-Driven Marketing & Performance Analytics</h3>
+        <p class="project-desc">Analysed audience engagement data and campaign performance metrics to identify trends and drive a 40% increase in social media engagement and 70% increase in podcast downloads. Developed KPI tracking dashboards to monitor marketing effectiveness across digital platforms. Conducted analysis on partnership outcomes contributing to a 20% increase in conference attendance.</p>
+        <div class="project-tags">
+          <span class="tag">Power BI</span>
+          <span class="tag">Campaign Analytics</span>
+          <span class="tag">KPI Dashboards</span>
+          <span class="tag">Stakeholder Reporting</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section class="skills" id="skills">
+  <span class="section-tag">Capabilities</span>
+  <h2>What I bring <em>to the table</em></h2>
+  <div class="skills-grid">
+    <div class="skill-block">
+      <div class="skill-icon">📊</div>
+      <h4>ESG Data & Reporting</h4>
+      <p>GRI, SASB, TCFD, ISSB frameworks. ESG KPI design, data governance, sustainability metrics, and climate risk analysis for energy and finance clients.</p>
+    </div>
+    <div class="skill-block">
+      <div class="skill-icon">🤖</div>
+      <h4>AI Platform Strategy</h4>
+      <p>End-to-end AI/ML roadmap definition, autonomous agent design, closed-loop system architecture, and five-tier AI autonomy framework development.</p>
+    </div>
+    <div class="skill-block">
+      <div class="skill-icon">⚡</div>
+      <h4>IoT & Edge Systems</h4>
+      <p>Specifications across ESP32 edge computing, Modbus/RS485 hardware control, sensor ETL pipelines, and real-time telemetry for energy infrastructure.</p>
+    </div>
+    <div class="skill-block">
+      <div class="skill-icon">🔢</div>
+      <h4>Analytics & Visualisation</h4>
+      <p>Power BI, Tableau, Excel (advanced), SQL, Python (foundational). Dashboard design, KPI tracking, stakeholder-ready reporting, and data storytelling.</p>
+    </div>
+    <div class="skill-block">
+      <div class="skill-icon">🌍</div>
+      <h4>Stakeholder & Strategy</h4>
+      <p>Cross-functional delivery across Lagos, London, and Atlanta. Structured technical recruitment, RFP development, and vendor onboarding.</p>
+    </div>
+    <div class="skill-block">
+      <div class="skill-icon">📈</div>
+      <h4>Marketing & Commercial</h4>
+      <p>MBA-qualified marketing strategist. B2B outreach, content analytics, CRM-driven engagement, and campaign performance measurement.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CREDENTIALS -->
+<section class="creds" id="creds">
+  <span class="section-tag">Education & Certifications</span>
+  <h2>Credentials that <em>count</em></h2>
+  <div class="creds-grid">
+    <div class="cred">
+      <span class="cred-year">2018–2021</span>
+      <h4>B.A. Political Science</h4>
+      <p>Howard University, Washington D.C. Magna Cum Laude, Dean's List</p>
+    </div>
+    <div class="cred">
+      <span class="cred-year">Current</span>
+      <h4>MBA Marketing Management</h4>
+      <p>Greenwich Business School, London</p>
+    </div>
+    <div class="cred">
+      <span class="cred-year">2024–2025</span>
+      <h4>SQL · Power BI · Generative AI</h4>
+      <p>SQL Data Analytics Foundation · Microsoft Power BI for Business Professionals · Google Generative AI Leader</p>
+    </div>
+    <div class="cred">
+      <span class="cred-year">Active</span>
+      <h4>ESG Framework Expertise</h4>
+      <p>GRI · SASB · TCFD · ISSB, applied across Deloitte client engagements</p>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <span class="section-tag">Get in Touch</span>
+  <h2>Let's build something <em>meaningful</em></h2>
+  <p class="contact-sub">Open to ESG analyst roles, AI strategy consulting, and sustainability-adjacent partnerships.</p>
+  <div class="contact-links">
+    <a href="mailto:Miles.ezeilo@gmail.com" class="btn btn-filled">miles.ezeilo@gmail.com</a>
+    <a href="https://www.linkedin.com/in/miles-ezeilo-1a0108143/" target="_blank" class="btn">LinkedIn</a>
+  </div>
+</section>
+
+<footer>
+  <p>&#169; 2026 Miles Ezeilo | ESG · AI · Strategy</p>
+  <p>Lagos · London · Atlanta</p>
+</footer>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 80);
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
